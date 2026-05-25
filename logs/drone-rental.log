@@ -1,0 +1,24 @@
+2026-05-25 15:26:28 [main] INFO  com.xxq.dronerent.DroneRentApplication - Starting DroneRentApplication using Java 17.0.17 with PID 13664 (D:\test02\java\DroneRent\target\classes started by Lenovo in D:\test02\java\DroneRent)
+2026-05-25 15:26:28 [main] DEBUG com.xxq.dronerent.DroneRentApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-05-25 15:26:28 [main] INFO  com.xxq.dronerent.DroneRentApplication - The following 1 profile is active: "dev"
+2026-05-25 15:26:29 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-25 15:26:29 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-25 15:26:29 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2026-05-25 15:26:30 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-25 15:26:30 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-25 15:26:30 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-25 15:26:30 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-25 15:26:30 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1238 ms
+2026-05-25 15:26:30 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@6aae0e6f'
+2026-05-25 15:26:30 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2026-05-25 15:26:30 [main] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-25 15:26:31 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@76e00bdb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7ee2423, org.springframework.security.web.context.SecurityContextHolderFilter@3b2db389, org.springframework.security.web.header.HeaderWriterFilter@6d35ff7b, org.springframework.web.filter.CorsFilter@343d1d25, org.springframework.security.web.authentication.logout.LogoutFilter@7ecb9e17, com.xxq.dronerent.security.JwtAuthenticationFilter@701c223a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a139347, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@186295cc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@762da62b, org.springframework.security.web.session.SessionManagementFilter@dde6f87, org.springframework.security.web.access.ExceptionTranslationFilter@2f0cab82, org.springframework.security.web.access.intercept.AuthorizationFilter@31880efa]
+2026-05-25 15:26:31 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-25 15:26:31 [main] INFO  com.xxq.dronerent.DroneRentApplication - Started DroneRentApplication in 2.875 seconds (process running for 3.525)
+2026-05-25 15:26:31 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL start create  ...  
+2026-05-25 15:26:31 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL end create  ...  
+2026-05-25 15:26:39 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-25 15:26:39 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-25 15:26:39 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-25 15:26:39 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/doc.html' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-05-25 15:26:40 [http-nio-8080-exec-4] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 347 ms
