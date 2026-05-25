@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElLoading } from 'element-plus'
+import type { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
 
 // 创建 axios 实例
 const service = axios.create({
@@ -10,9 +11,44 @@ const service = axios.create({
   }
 })
 
+// Loading 实例管理
+let loadingInstance: LoadingInstance | null = null
+let requestCount = 0
+
+/**
+ * 显示 Loading
+ */
+const showLoading = () => {
+  if (requestCount === 0) {
+    loadingInstance = ElLoading.service({
+      lock: true,
+      text: '加载中...',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+  }
+  requestCount++
+}
+
+/**
+ * 隐藏 Loading
+ */
+const hideLoading = () => {
+  requestCount--
+  if (requestCount <= 0) {
+    requestCount = 0
+    loadingInstance?.close()
+    loadingInstance = null
+  }
+}
+
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
+    // 显示 Loading（可以通过 config.hideLoading 控制）
+    if (!config.hideLoading) {
+      showLoading()
+    }
+    
     // 从 localStorage 获取 token
     const token = localStorage.getItem('token')
     if (token) {
@@ -22,6 +58,7 @@ service.interceptors.request.use(
   },
   (error) => {
     console.error('请求错误:', error)
+    hideLoading()
     return Promise.reject(error)
   }
 )
@@ -29,6 +66,9 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   (response) => {
+    // 隐藏 Loading
+    hideLoading()
+    
     const res = response.data
     
     // 如果返回的状态码不是 200，则认为是错误
@@ -47,6 +87,9 @@ service.interceptors.response.use(
     }
   },
   (error) => {
+    // 隐藏 Loading
+    hideLoading()
+    
     console.error('响应错误:', error)
     
     let message = '网络错误，请稍后重试'

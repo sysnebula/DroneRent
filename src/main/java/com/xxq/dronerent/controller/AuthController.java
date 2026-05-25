@@ -1,5 +1,6 @@
 package com.xxq.dronerent.controller;
 
+import com.xxq.dronerent.annotation.RateLimit;
 import com.xxq.dronerent.common.JwtUtil;
 import com.xxq.dronerent.common.Result;
 import com.xxq.dronerent.dto.LoginDTO;
@@ -43,6 +44,7 @@ public class AuthController {
      * @return JWT Token 和用户信息
      */
     @Operation(summary = "用户登录", description = "使用用户名和密码登录，返回 JWT Token")
+    @RateLimit(key = "#ip", timeWindow = 60, maxRequests = 10, message = "登录尝试次数过多，请60秒后再试")
     @PostMapping("/login")
     public Result<LoginVO> login(@Valid @RequestBody LoginDTO loginDTO) {
         log.info("用户登录: {}", loginDTO.getUsername());

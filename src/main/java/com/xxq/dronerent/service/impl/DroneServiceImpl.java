@@ -1,6 +1,7 @@
 package com.xxq.dronerent.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxq.dronerent.common.BusinessException;
 import com.xxq.dronerent.common.Constants;
@@ -8,6 +9,8 @@ import com.xxq.dronerent.entity.Drone;
 import com.xxq.dronerent.mapper.DroneMapper;
 import com.xxq.dronerent.service.DroneService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service
 public class DroneServiceImpl extends ServiceImpl<DroneMapper, Drone> implements DroneService {
+
+    @Override
+    @Cacheable(value = "drones", key = "#id")
+    public Drone getById(java.io.Serializable id) {
+        return super.getById(id);
+    }
+
+    @Override
+    @CacheEvict(value = "drones", allEntries = true)
+    public boolean save(Drone entity) {
+        return super.save(entity);
+    }
+
+    @Override
+    @CacheEvict(value = "drones", allEntries = true)
+    public boolean updateById(Drone entity) {
+        return super.updateById(entity);
+    }
+
+    @Override
+    @CacheEvict(value = "drones", allEntries = true)
+    public boolean removeById(java.io.Serializable id) {
+        return super.removeById(id);
+    }
 
     @Override
     public boolean validateDroneNoUnique(String droneNo, Long excludeId) {
