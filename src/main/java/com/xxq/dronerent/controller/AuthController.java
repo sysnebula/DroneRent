@@ -75,7 +75,8 @@ public class AuthController {
             return Result.success("登录成功", loginVO);
             
         } catch (Exception e) {
-            log.error("登录失败: {}", e.getMessage());
+            log.error("登录失败: {}", e.getMessage(), e);
+            log.error("异常类型: {}", e.getClass().getName());
             return Result.error("用户名或密码错误");
         }
     }

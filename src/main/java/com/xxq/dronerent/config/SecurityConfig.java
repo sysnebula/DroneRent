@@ -103,16 +103,16 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         
-        // 允许的源
-        configuration.setAllowedOrigins(List.of("*"));
+        // 允许的源模式（使用 patterns 而不是 origins，以支持 allowCredentials）
+        configuration.setAllowedOriginPatterns(List.of("*"));
         
         // 允许的方法
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         
         // 允许的请求头
         configuration.setAllowedHeaders(List.of("*"));
         
-        // 允许携带凭证
+        // 允许携带凭证（Cookie、Authorization headers 等）
         configuration.setAllowCredentials(true);
         
         // 预检请求缓存时间

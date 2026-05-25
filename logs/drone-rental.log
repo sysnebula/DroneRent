@@ -22,3 +22,470 @@
 2026-05-25 15:26:39 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
 2026-05-25 15:26:39 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/doc.html' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
 2026-05-25 15:26:40 [http-nio-8080-exec-4] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 347 ms
+2026-05-25 15:43:39 [main] INFO  com.xxq.dronerent.DroneRentApplication - Starting DroneRentApplication using Java 17.0.17 with PID 30612 (D:\test02\java\DroneRent\target\classes started by Lenovo in D:\test02\java\DroneRent)
+2026-05-25 15:43:39 [main] DEBUG com.xxq.dronerent.DroneRentApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-05-25 15:43:39 [main] INFO  com.xxq.dronerent.DroneRentApplication - The following 1 profile is active: "dev"
+2026-05-25 15:43:39 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-25 15:43:39 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-25 15:43:39 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2026-05-25 15:43:40 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-25 15:43:40 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-25 15:43:40 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-25 15:43:40 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-25 15:43:40 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1159 ms
+2026-05-25 15:43:40 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@2017f6e6'
+2026-05-25 15:43:40 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2026-05-25 15:43:40 [main] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-25 15:43:41 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6cde0c69, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f4d2294, org.springframework.security.web.context.SecurityContextHolderFilter@5c41b8d8, org.springframework.security.web.header.HeaderWriterFilter@40ac0a56, org.springframework.web.filter.CorsFilter@22361e23, org.springframework.security.web.authentication.logout.LogoutFilter@69bc4024, com.xxq.dronerent.security.JwtAuthenticationFilter@7523d5a1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5f166f2e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ef93e01, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2e0516a3, org.springframework.security.web.session.SessionManagementFilter@702b656a, org.springframework.security.web.access.ExceptionTranslationFilter@5d32c1c7, org.springframework.security.web.access.intercept.AuthorizationFilter@77ce8bc5]
+2026-05-25 15:43:41 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-25 15:43:41 [main] INFO  com.xxq.dronerent.DroneRentApplication - Started DroneRentApplication in 2.74 seconds (process running for 3.203)
+2026-05-25 15:43:41 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL start create  ...  
+2026-05-25 15:43:41 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL end create  ...  
+2026-05-25 15:43:43 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-25 15:43:43 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-25 15:43:43 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-25 15:43:43 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/doc.html' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-05-25 15:43:44 [http-nio-8080-exec-3] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 420 ms
+2026-05-25 15:54:30 [http-nio-8080-exec-2] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+	at org.springframework.web.cors.CorsConfiguration.validateAllowCredentials(CorsConfiguration.java:538)
+	at org.springframework.web.cors.CorsConfiguration.checkOrigin(CorsConfiguration.java:642)
+	at org.springframework.web.cors.DefaultCorsProcessor.checkOrigin(DefaultCorsProcessor.java:173)
+	at org.springframework.web.cors.DefaultCorsProcessor.handleInternal(DefaultCorsProcessor.java:115)
+	at org.springframework.web.cors.DefaultCorsProcessor.processRequest(DefaultCorsProcessor.java:94)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:87)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2026-05-25 15:55:31 [main] INFO  com.xxq.dronerent.DroneRentApplication - Starting DroneRentApplication using Java 17.0.17 with PID 28948 (D:\test02\java\DroneRent\target\classes started by Lenovo in D:\test02\java\DroneRent)
+2026-05-25 15:55:31 [main] DEBUG com.xxq.dronerent.DroneRentApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-05-25 15:55:31 [main] INFO  com.xxq.dronerent.DroneRentApplication - The following 1 profile is active: "dev"
+2026-05-25 15:55:31 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-25 15:55:31 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-25 15:55:31 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
+2026-05-25 15:55:32 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-25 15:55:32 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-25 15:55:32 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-25 15:55:32 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-25 15:55:32 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1232 ms
+2026-05-25 15:55:32 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@4bc9ca97'
+2026-05-25 15:55:32 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2026-05-25 15:55:32 [main] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-25 15:55:33 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@32a4ea4e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@347b370c, org.springframework.security.web.context.SecurityContextHolderFilter@4fafd27e, org.springframework.security.web.header.HeaderWriterFilter@2b6b487c, org.springframework.web.filter.CorsFilter@26aee0a6, org.springframework.security.web.authentication.logout.LogoutFilter@6ed691fd, com.xxq.dronerent.security.JwtAuthenticationFilter@5980fa73, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@d512c1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@578b2dec, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@20184ade, org.springframework.security.web.session.SessionManagementFilter@77ea960f, org.springframework.security.web.access.ExceptionTranslationFilter@6ec3a4c2, org.springframework.security.web.access.intercept.AuthorizationFilter@6f4d2294]
+2026-05-25 15:55:33 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-25 15:55:33 [main] INFO  com.xxq.dronerent.DroneRentApplication - Started DroneRentApplication in 2.866 seconds (process running for 3.422)
+2026-05-25 15:55:33 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL start create  ...  
+2026-05-25 15:55:33 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL end create  ...  
+2026-05-25 15:58:00 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-25 15:58:00 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-25 15:58:00 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-25 15:58:00 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+	at org.springframework.web.cors.CorsConfiguration.validateAllowCredentials(CorsConfiguration.java:538)
+	at org.springframework.web.cors.CorsConfiguration.checkOrigin(CorsConfiguration.java:642)
+	at org.springframework.web.cors.DefaultCorsProcessor.checkOrigin(DefaultCorsProcessor.java:173)
+	at org.springframework.web.cors.DefaultCorsProcessor.handleInternal(DefaultCorsProcessor.java:115)
+	at org.springframework.web.cors.DefaultCorsProcessor.processRequest(DefaultCorsProcessor.java:94)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:87)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2026-05-25 15:58:00 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for ERROR dispatch to '/error' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-05-25 15:58:59 [main] INFO  com.xxq.dronerent.DroneRentApplication - Starting DroneRentApplication using Java 17.0.17 with PID 3624 (D:\test02\java\DroneRent\target\classes started by Lenovo in D:\test02\java\DroneRent)
+2026-05-25 15:58:59 [main] DEBUG com.xxq.dronerent.DroneRentApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-05-25 15:58:59 [main] INFO  com.xxq.dronerent.DroneRentApplication - The following 1 profile is active: "dev"
+2026-05-25 15:59:00 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-25 15:59:00 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-25 15:59:00 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2026-05-25 15:59:00 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-25 15:59:00 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-25 15:59:00 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-25 15:59:00 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-25 15:59:00 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1162 ms
+2026-05-25 15:59:00 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@336f49a1'
+2026-05-25 15:59:00 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2026-05-25 15:59:01 [main] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-25 15:59:01 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@77204651, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@51cca357, org.springframework.security.web.context.SecurityContextHolderFilter@fd5689d, org.springframework.security.web.header.HeaderWriterFilter@5c41b8d8, org.springframework.web.filter.CorsFilter@3a9c11fb, org.springframework.security.web.authentication.logout.LogoutFilter@2e0516a3, com.xxq.dronerent.security.JwtAuthenticationFilter@64dc86c6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@218f2f51, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1d9af731, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@416c8bb5, org.springframework.security.web.session.SessionManagementFilter@48ee3c2d, org.springframework.security.web.access.ExceptionTranslationFilter@528f5b7f, org.springframework.security.web.access.intercept.AuthorizationFilter@70439c3]
+2026-05-25 15:59:01 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-25 15:59:01 [main] INFO  com.xxq.dronerent.DroneRentApplication - Started DroneRentApplication in 2.709 seconds (process running for 3.19)
+2026-05-25 15:59:01 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL start create  ...  
+2026-05-25 15:59:01 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL end create  ...  
+2026-05-25 15:59:05 [http-nio-8080-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-25 15:59:05 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-25 15:59:05 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-25 15:59:05 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/api/auth/login' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-05-25 15:59:05 [http-nio-8080-exec-1] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 15:59:05 [http-nio-8080-exec-1] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 15:59:05 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-25 15:59:06 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2ae5f398
+2026-05-25 15:59:06 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-25 15:59:06 [http-nio-8080-exec-1] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 15:59:15 [http-nio-8080-exec-8] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 15:59:15 [http-nio-8080-exec-8] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 15:59:15 [http-nio-8080-exec-8] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 15:59:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-25 15:59:43 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-25 15:59:44 [main] INFO  com.xxq.dronerent.DroneRentApplication - Starting DroneRentApplication using Java 17.0.17 with PID 32608 (D:\test02\java\DroneRent\target\classes started by Lenovo in D:\test02\java\DroneRent)
+2026-05-25 15:59:44 [main] DEBUG com.xxq.dronerent.DroneRentApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-05-25 15:59:44 [main] INFO  com.xxq.dronerent.DroneRentApplication - The following 1 profile is active: "dev"
+2026-05-25 15:59:45 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-25 15:59:45 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-25 15:59:45 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2026-05-25 15:59:46 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-25 15:59:46 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-25 15:59:46 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-25 15:59:46 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-25 15:59:46 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1161 ms
+2026-05-25 15:59:46 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@61da0413'
+2026-05-25 15:59:46 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2026-05-25 15:59:46 [main] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-25 15:59:47 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@c190cfc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@77ce8bc5, org.springframework.security.web.context.SecurityContextHolderFilter@56c6d515, org.springframework.security.web.header.HeaderWriterFilter@5eb2972f, org.springframework.web.filter.CorsFilter@2fcc5f49, org.springframework.security.web.authentication.logout.LogoutFilter@62054faf, com.xxq.dronerent.security.JwtAuthenticationFilter@1f758e4f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@528f5b7f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3ccfac29, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@28e48b65, org.springframework.security.web.session.SessionManagementFilter@c4551c6, org.springframework.security.web.access.ExceptionTranslationFilter@4f676900, org.springframework.security.web.access.intercept.AuthorizationFilter@1efcba00]
+2026-05-25 15:59:47 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-25 15:59:47 [main] INFO  com.xxq.dronerent.DroneRentApplication - Started DroneRentApplication in 2.702 seconds (process running for 3.33)
+2026-05-25 15:59:47 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL start create  ...  
+2026-05-25 15:59:47 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL end create  ...  
+2026-05-25 15:59:54 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-25 15:59:54 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-25 15:59:54 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-05-25 15:59:54 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/api/auth/login' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-05-25 15:59:54 [http-nio-8080-exec-1] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 15:59:54 [http-nio-8080-exec-1] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 15:59:54 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-25 15:59:54 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70ed05b8
+2026-05-25 15:59:54 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-25 15:59:54 [http-nio-8080-exec-1] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:02:00 [http-nio-8080-exec-5] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:02:00 [http-nio-8080-exec-5] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:02:00 [http-nio-8080-exec-5] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:02:39 [http-nio-8080-exec-4] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:02:39 [http-nio-8080-exec-4] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:02:39 [http-nio-8080-exec-4] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:03:10 [http-nio-8080-exec-6] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:03:10 [http-nio-8080-exec-6] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:03:10 [http-nio-8080-exec-6] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:05:40 [http-nio-8080-exec-7] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:05:40 [http-nio-8080-exec-7] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:05:40 [http-nio-8080-exec-7] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:05:43 [http-nio-8080-exec-8] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:05:43 [http-nio-8080-exec-8] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:05:43 [http-nio-8080-exec-8] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:05:45 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-25 16:05:45 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-25 16:05:46 [main] INFO  com.xxq.dronerent.DroneRentApplication - Starting DroneRentApplication using Java 17.0.17 with PID 18816 (D:\test02\java\DroneRent\target\classes started by Lenovo in D:\test02\java\DroneRent)
+2026-05-25 16:05:46 [main] DEBUG com.xxq.dronerent.DroneRentApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-05-25 16:05:46 [main] INFO  com.xxq.dronerent.DroneRentApplication - The following 1 profile is active: "dev"
+2026-05-25 16:05:47 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-25 16:05:47 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-25 16:05:47 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
+2026-05-25 16:05:48 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-25 16:05:48 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-25 16:05:48 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-25 16:05:48 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-25 16:05:48 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1169 ms
+2026-05-25 16:05:48 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@226d5af0'
+2026-05-25 16:05:48 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2026-05-25 16:05:48 [main] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-25 16:05:49 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@340b4f07, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e994ca, org.springframework.security.web.context.SecurityContextHolderFilter@39afe59f, org.springframework.security.web.header.HeaderWriterFilter@4fafd27e, org.springframework.web.filter.CorsFilter@5a205ee5, org.springframework.security.web.authentication.logout.LogoutFilter@20184ade, com.xxq.dronerent.security.JwtAuthenticationFilter@1e191150, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ede035e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@43756cb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7fb44737, org.springframework.security.web.session.SessionManagementFilter@36e3321e, org.springframework.security.web.access.ExceptionTranslationFilter@5f166f2e, org.springframework.security.web.access.intercept.AuthorizationFilter@51cca357]
+2026-05-25 16:05:49 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-25 16:05:49 [main] INFO  com.xxq.dronerent.DroneRentApplication - Started DroneRentApplication in 2.638 seconds (process running for 3.234)
+2026-05-25 16:05:49 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL start create  ...  
+2026-05-25 16:05:49 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL end create  ...  
+2026-05-25 16:06:04 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-25 16:06:04 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-25 16:06:04 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-05-25 16:06:04 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/api/auth/login' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-05-25 16:06:04 [http-nio-8080-exec-1] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:06:04 [http-nio-8080-exec-1] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:06:04 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-25 16:06:04 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4b1d667d
+2026-05-25 16:06:04 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-25 16:06:04 [http-nio-8080-exec-1] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:07:33 [http-nio-8080-exec-10] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:07:33 [http-nio-8080-exec-10] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:07:33 [http-nio-8080-exec-10] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:08:09 [http-nio-8080-exec-2] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:08:09 [http-nio-8080-exec-2] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:08:09 [http-nio-8080-exec-2] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:08:18 [http-nio-8080-exec-6] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:08:18 [http-nio-8080-exec-6] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:08:18 [http-nio-8080-exec-6] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:09:08 [http-nio-8080-exec-3] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:09:08 [http-nio-8080-exec-3] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:09:08 [http-nio-8080-exec-3] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+2026-05-25 16:09:49 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-25 16:09:49 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-25 16:09:53 [main] INFO  com.xxq.dronerent.DroneRentApplication - Starting DroneRentApplication using Java 17.0.17 with PID 14996 (D:\test02\java\DroneRent\target\classes started by Lenovo in D:\test02\java\DroneRent)
+2026-05-25 16:09:53 [main] DEBUG com.xxq.dronerent.DroneRentApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-05-25 16:09:53 [main] INFO  com.xxq.dronerent.DroneRentApplication - The following 1 profile is active: "dev"
+2026-05-25 16:09:54 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-25 16:09:54 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-25 16:09:54 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2026-05-25 16:09:55 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-25 16:09:55 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-25 16:09:55 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-25 16:09:55 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-25 16:09:55 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1133 ms
+2026-05-25 16:09:55 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@27f71195'
+2026-05-25 16:09:55 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2026-05-25 16:09:55 [main] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-25 16:09:56 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70439c3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@72a33316, org.springframework.security.web.context.SecurityContextHolderFilter@48ee3c2d, org.springframework.security.web.header.HeaderWriterFilter@702b656a, org.springframework.web.filter.CorsFilter@57fce8b, org.springframework.security.web.authentication.logout.LogoutFilter@6cde0c69, com.xxq.dronerent.security.JwtAuthenticationFilter@64dc86c6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3a80c534, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@fd5689d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@77204651, org.springframework.security.web.session.SessionManagementFilter@39f4a7c4, org.springframework.security.web.access.ExceptionTranslationFilter@4db46344, org.springframework.security.web.access.intercept.AuthorizationFilter@5855b0ed]
+2026-05-25 16:09:56 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-25 16:09:56 [main] INFO  com.xxq.dronerent.DroneRentApplication - Started DroneRentApplication in 2.674 seconds (process running for 3.143)
+2026-05-25 16:09:56 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL start create  ...  
+2026-05-25 16:09:56 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL end create  ...  
+2026-05-25 16:09:59 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-25 16:09:59 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-25 16:09:59 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-25 16:10:00 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/api/auth/login' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-05-25 16:10:00 [http-nio-8080-exec-1] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:10:00 [http-nio-8080-exec-1] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:10:00 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-25 16:10:00 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3cf163d5
+2026-05-25 16:10:00 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-25 16:10:00 [http-nio-8080-exec-1] ERROR com.xxq.dronerent.controller.AuthController - 登录失败: 用户名或密码错误
+org.springframework.security.authentication.BadCredentialsException: 用户名或密码错误
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.additionalAuthenticationChecks(DaoAuthenticationProvider.java:89)
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:147)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182)
+	at com.xxq.dronerent.controller.AuthController.login(AuthController.java:52)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:254)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:182)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.xxq.dronerent.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:72)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2026-05-25 16:10:00 [http-nio-8080-exec-1] ERROR com.xxq.dronerent.controller.AuthController - 异常类型: org.springframework.security.authentication.BadCredentialsException
+2026-05-25 16:11:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-25 16:11:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-25 16:11:58 [main] INFO  com.xxq.dronerent.DroneRentApplication - Starting DroneRentApplication using Java 17.0.17 with PID 33188 (D:\test02\java\DroneRent\target\classes started by Lenovo in D:\test02\java\DroneRent)
+2026-05-25 16:11:58 [main] DEBUG com.xxq.dronerent.DroneRentApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-05-25 16:11:58 [main] INFO  com.xxq.dronerent.DroneRentApplication - The following 1 profile is active: "dev"
+2026-05-25 16:11:59 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-05-25 16:11:59 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-05-25 16:11:59 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2026-05-25 16:11:59 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-25 16:11:59 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-25 16:11:59 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-25 16:11:59 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-05-25 16:11:59 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1193 ms
+2026-05-25 16:11:59 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Registered plugin: 'com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor@4fb57fb3'
+2026-05-25 16:11:59 [main] DEBUG c.b.m.e.spring.MybatisSqlSessionFactoryBean - Property 'mapperLocations' was not specified.
+2026-05-25 16:12:00 [main] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-05-25 16:12:00 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3a9c11fb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@416c8bb5, org.springframework.security.web.context.SecurityContextHolderFilter@218f2f51, org.springframework.security.web.header.HeaderWriterFilter@5f166f2e, org.springframework.web.filter.CorsFilter@340b4f07, org.springframework.security.web.authentication.logout.LogoutFilter@347b370c, com.xxq.dronerent.security.JwtAuthenticationFilter@5f3b84bd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@39afe59f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16f34376, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e994ca, org.springframework.security.web.session.SessionManagementFilter@3a80c534, org.springframework.security.web.access.ExceptionTranslationFilter@5c41b8d8, org.springframework.security.web.access.intercept.AuthorizationFilter@57fce8b]
+2026-05-25 16:12:00 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-05-25 16:12:00 [main] INFO  com.xxq.dronerent.DroneRentApplication - Started DroneRentApplication in 2.813 seconds (process running for 3.281)
+2026-05-25 16:12:00 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL start create  ...  
+2026-05-25 16:12:00 [main] DEBUG c.b.mybatisplus.autoconfigure.DdlApplicationRunner -   ...  DDL end create  ...  
+2026-05-25 16:12:04 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-25 16:12:04 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-25 16:12:04 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-05-25 16:12:04 [http-nio-8080-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/api/test/generate-password' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-05-25 16:12:54 [http-nio-8080-exec-3] INFO  com.xxq.dronerent.controller.AuthController - 用户登录: admin
+2026-05-25 16:12:54 [http-nio-8080-exec-3] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:12:54 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-25 16:12:54 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1e4500ed
+2026-05-25 16:12:54 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-25 16:12:54 [http-nio-8080-exec-3] INFO  com.xxq.dronerent.controller.AuthController - 用户登录成功: admin
+2026-05-25 16:12:54 [http-nio-8080-exec-4] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:12:54 [http-nio-8080-exec-4] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - 用户认证成功: admin
+2026-05-25 16:13:00 [http-nio-8080-exec-10] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:13:00 [http-nio-8080-exec-10] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - 用户认证成功: admin
+2026-05-25 16:13:00 [http-nio-8080-exec-10] INFO  com.xxq.dronerent.controller.DroneController - 分页查询无人机: pageNum=1, pageSize=10, brand=, model=, status=
+2026-05-25 16:13:01 [http-nio-8080-exec-7] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:13:01 [http-nio-8080-exec-7] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - 用户认证成功: admin
+2026-05-25 16:13:01 [http-nio-8080-exec-7] INFO  com.xxq.dronerent.controller.OrdersController - 分页查询订单: pageNum=1, pageSize=10, status=, customerId=null
+2026-05-25 16:13:34 [http-nio-8080-exec-1] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:13:34 [http-nio-8080-exec-1] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - 用户认证成功: admin
+2026-05-25 16:13:34 [http-nio-8080-exec-1] INFO  com.xxq.dronerent.controller.DroneController - 分页查询无人机: pageNum=1, pageSize=10, brand=, model=, status=
+2026-05-25 16:13:35 [http-nio-8080-exec-3] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:13:35 [http-nio-8080-exec-3] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - 用户认证成功: admin
+2026-05-25 16:13:35 [http-nio-8080-exec-3] INFO  com.xxq.dronerent.controller.OrdersController - 分页查询订单: pageNum=1, pageSize=10, status=, customerId=null
+2026-05-25 16:13:38 [http-nio-8080-exec-2] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:13:38 [http-nio-8080-exec-2] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - 用户认证成功: admin
+2026-05-25 16:13:38 [http-nio-8080-exec-2] INFO  com.xxq.dronerent.controller.DroneController - 分页查询无人机: pageNum=1, pageSize=10, brand=, model=, status=
+2026-05-25 16:13:38 [http-nio-8080-exec-4] DEBUG c.xxq.dronerent.security.CustomUserDetailsService - 加载用户信息: admin
+2026-05-25 16:13:38 [http-nio-8080-exec-4] DEBUG c.xxq.dronerent.security.JwtAuthenticationFilter - 用户认证成功: admin
+2026-05-25 16:13:38 [http-nio-8080-exec-4] INFO  com.xxq.dronerent.controller.OrdersController - 分页查询订单: pageNum=1, pageSize=10, status=, customerId=null

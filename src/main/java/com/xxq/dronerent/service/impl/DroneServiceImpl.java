@@ -42,10 +42,10 @@ public class DroneServiceImpl extends ServiceImpl<DroneMapper, Drone> implements
         }
         
         // 定义合法的状态转换规则
-        // IDLE -> RENTED, MAINTENANCE, SCRAPPED
-        // RENTED -> IDLE, MAINTENANCE
-        // MAINTENANCE -> IDLE
-        // SCRAPPED -> (不允许转换)
+        // IDLE（空闲）-> RENTED, MAINTENANCE, SCRAPPED
+        // RENTED（出租中）-> IDLE, MAINTENANCE, SCRAPPED
+        // MAINTENANCE（维修中）-> IDLE, SCRAPPED
+        // SCRAPPED（报废）-> (不允许转换)
         
         switch (currentStatus) {
             case Constants.DRONE_STATUS_IDLE:
@@ -55,13 +55,15 @@ public class DroneServiceImpl extends ServiceImpl<DroneMapper, Drone> implements
                        Constants.DRONE_STATUS_SCRAPPED.equals(newStatus);
                        
             case Constants.DRONE_STATUS_RENTED:
-                // 出租中可以转换为：空闲（归还）、维修中
+                // 出租中可以转换为：空闲（归还）、维修中、报废
                 return Constants.DRONE_STATUS_IDLE.equals(newStatus) ||
-                       Constants.DRONE_STATUS_MAINTENANCE.equals(newStatus);
+                       Constants.DRONE_STATUS_MAINTENANCE.equals(newStatus) ||
+                       Constants.DRONE_STATUS_SCRAPPED.equals(newStatus);
                        
             case Constants.DRONE_STATUS_MAINTENANCE:
-                // 维修中可以转换为：空闲（维修完成）
-                return Constants.DRONE_STATUS_IDLE.equals(newStatus);
+                // 维修中可以转换为：空闲（维修完成）、报废
+                return Constants.DRONE_STATUS_IDLE.equals(newStatus) ||
+                       Constants.DRONE_STATUS_SCRAPPED.equals(newStatus);
                 
             case Constants.DRONE_STATUS_SCRAPPED:
                 // 报废后不允许任何状态转换
