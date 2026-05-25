@@ -8,22 +8,22 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * MyBatis-Plus 配置类
- * 配置分页插件等
+ * 配置分页插件
  *
- * @author yourcompany
+ * @author xxq
  * @since 2024-01-01
  */
 @Configuration
 public class MybatisPlusConfig {
 
     /**
-     * 配置 MyBatis-Plus 插件
+     * 分页插件配置
      */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         
-        // 添加分页插件
+        // 添加 MySQL 分页插件
         PaginationInnerInterceptor paginationInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
         // 设置最大单页限制数量，默认 500 条，-1 不受限制
         paginationInterceptor.setMaxLimit(500L);
