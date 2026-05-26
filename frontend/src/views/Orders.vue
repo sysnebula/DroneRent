@@ -31,11 +31,13 @@
       <!-- 表格 -->
       <el-table :data="tableData" border stripe v-loading="loading">
         <el-table-column prop="orderNo" label="订单编号" width="180" />
-        <el-table-column prop="customerId" label="客户ID" width="100" />
+        <el-table-column prop="customerName" label="客户姓名" width="100" />
         <el-table-column prop="droneNo" label="设备编号" width="120" />
+        <el-table-column prop="droneModel" label="设备型号" width="120" />
         <el-table-column prop="startDate" label="开始日期" width="120" />
         <el-table-column prop="endDate" label="结束日期" width="120" />
         <el-table-column prop="totalAmount" label="总金额" width="100" />
+        <el-table-column prop="userName" label="经办人" width="100" />
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="getStatusType(row.status)">
@@ -46,17 +48,25 @@
         <el-table-column label="操作" fixed="right" width="300">
           <template #default="{ row }">
             <el-button size="small" @click="handleView(row)">详情</el-button>
-            <el-button 
-              v-if="row.status === 'RENTING'" 
-              size="small" 
+            <el-button
+              v-if="row.status === 'PENDING'"
+              size="small"
+              type="primary"
+              @click="handlePay(row)"
+            >
+              支付
+            </el-button>
+            <el-button
+              v-if="row.status === 'RENTING'"
+              size="small"
               type="success"
               @click="handleReturn(row)"
             >
               归还
             </el-button>
-            <el-button 
-              v-if="row.status === 'PENDING'" 
-              size="small" 
+            <el-button
+              v-if="row.status === 'PENDING'"
+              size="small"
               type="danger"
               @click="handleCancel(row)"
             >
@@ -88,8 +98,10 @@
             {{ getStatusText(currentOrder.status) }}
           </el-tag>
         </el-descriptions-item>
-        <el-descriptions-item label="客户ID">{{ currentOrder.customerId }}</el-descriptions-item>
+        <el-descriptions-item label="客户姓名">{{ currentOrder.customerName }}</el-descriptions-item>
         <el-descriptions-item label="设备编号">{{ currentOrder.droneNo }}</el-descriptions-item>
+        <el-descriptions-item label="设备型号">{{ currentOrder.droneModel }}</el-descriptions-item>
+        <el-descriptions-item label="经办人">{{ currentOrder.userName }}</el-descriptions-item>
         <el-descriptions-item label="开始日期">{{ currentOrder.startDate }}</el-descriptions-item>
         <el-descriptions-item label="结束日期">{{ currentOrder.endDate }}</el-descriptions-item>
         <el-descriptions-item label="租赁天数">{{ currentOrder.rentalDays }}天</el-descriptions-item>
@@ -99,18 +111,108 @@
         <el-descriptions-item label="备注" :span="2">{{ currentOrder.remark || '-' }}</el-descriptions-item>
       </el-descriptions>
     </el-dialog>
+
+    <!-- 新增订单对话框 -->
+    <el-dialog v-model="createVisible" title="新增订单" width="600px" @close="resetForm">
+      <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
+        <el-form-item label="客户" prop="customerId">
+          <el-select v-model="form.customerId" placeholder="请选择客户" filterable style="width: 100%">
+            <el-option
+              v-for="c in customerList"
+              :key="c.id"
+              :label="`${c.name} (${c.phone})`"
+              :value="c.id"
+            />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="无人机" prop="droneId">
+          <el-select v-model="form.droneId" placeholder="请选择无人机" filterable style="width: 100%">
+            <el-option
+              v-for="d in droneList"
+              :key="d.id"
+              :label="`${d.droneNo} - ${d.brand} ${d.model} (¥${d.dailyRentalPrice}/天)`"
+              :value="d.id"
+            />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="开始日期" prop="startDate">
+          <el-date-picker
+            v-model="form.startDate"
+            type="date"
+            placeholder="选择开始日期"
+            value-format="YYYY-MM-DD"
+            :disabled-date="disabledStartDate"
+            style="width: 100%"
+          />
+        </el-form-item>
+
+        <el-form-item label="结束日期" prop="endDate">
+          <el-date-picker
+            v-model="form.endDate"
+            type="date"
+            placeholder="选择结束日期"
+            value-format="YYYY-MM-DD"
+            :disabled-date="disabledEndDate"
+            style="width: 100%"
+          />
+        </el-form-item>
+
+        <el-form-item label="取机人">
+          <el-input v-model="form.pickupPerson" placeholder="取机人姓名" />
+        </el-form-item>
+
+        <el-form-item label="取机人电话">
+          <el-input v-model="form.pickupPhone" placeholder="取机人电话" />
+        </el-form-item>
+
+        <el-form-item label="备注">
+          <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="订单备注" />
+        </el-form-item>
+      </el-form>
+
+      <template #footer>
+        <el-button @click="createVisible = false">取消</el-button>
+        <el-button type="primary" @click="handleSubmit" :loading="submitting">确认创建</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox, type FormInstance, type FormRules } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
-import { getOrderList, returnOrder, cancelOrder } from '@/api/order'
+import { getOrderList, returnOrder, cancelOrder, payOrder, createOrder } from '@/api/order'
+import { getCustomerPage } from '@/api/customer'
+import { getDroneList } from '@/api/drone'
 
 const loading = ref(false)
+const submitting = ref(false)
 const detailVisible = ref(false)
+const createVisible = ref(false)
 const currentOrder = ref<any>(null)
+const formRef = ref<FormInstance>()
+const customerList = ref<any[]>([])
+const droneList = ref<any[]>([])
+
+const form = reactive({
+  customerId: null as number | null,
+  droneId: null as number | null,
+  startDate: '',
+  endDate: '',
+  pickupPerson: '',
+  pickupPhone: '',
+  remark: ''
+})
+
+const rules: FormRules = {
+  customerId: [{ required: true, message: '请选择客户', trigger: 'change' }],
+  droneId: [{ required: true, message: '请选择无人机', trigger: 'change' }],
+  startDate: [{ required: true, message: '请选择开始日期', trigger: 'change' }],
+  endDate: [{ required: true, message: '请选择结束日期', trigger: 'change' }]
+}
 
 const searchForm = reactive({
   status: ''
@@ -154,15 +256,106 @@ const handleReset = () => {
   handleSearch()
 }
 
-// 新增（简化版，实际应该跳转到表单页面）
+// 新增
 const handleAdd = () => {
-  ElMessage.info('请使用后端 API 创建订单')
+  fetchCustomers()
+  fetchIdleDrones()
+  createVisible.value = true
+}
+
+const resetForm = () => {
+  formRef.value?.resetFields()
+  form.customerId = null
+  form.droneId = null
+  form.startDate = ''
+  form.endDate = ''
+  form.pickupPerson = ''
+  form.pickupPhone = ''
+  form.remark = ''
+}
+
+const disabledStartDate = (date: Date) => {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  return date.getTime() < today.getTime()
+}
+
+const disabledEndDate = (date: Date) => {
+  if (!form.startDate) {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    return date.getTime() < today.getTime()
+  }
+  const start = new Date(form.startDate)
+  start.setHours(0, 0, 0, 0)
+  return date.getTime() <= start.getTime()
+}
+
+const handleSubmit = async () => {
+  const valid = await formRef.value?.validate().catch(() => false)
+  if (!valid) return
+
+  submitting.value = true
+  try {
+    await createOrder({
+      customerId: form.customerId,
+      droneId: form.droneId,
+      startDate: form.startDate,
+      endDate: form.endDate,
+      pickupPerson: form.pickupPerson || undefined,
+      pickupPhone: form.pickupPhone || undefined,
+      remark: form.remark || undefined
+    })
+    ElMessage.success('订单创建成功')
+    createVisible.value = false
+    resetForm()
+    fetchData()
+  } catch (error) {
+    console.error('创建订单失败:', error)
+  } finally {
+    submitting.value = false
+  }
+}
+
+const fetchCustomers = async () => {
+  try {
+    const res = await getCustomerPage({ pageNum: 1, pageSize: 1000 })
+    customerList.value = res.data.list || []
+  } catch (error) {
+    console.error('获取客户列表失败:', error)
+  }
+}
+
+const fetchIdleDrones = async () => {
+  try {
+    const res = await getDroneList({ pageNum: 1, pageSize: 1000, status: 'IDLE' })
+    droneList.value = res.data.list || []
+  } catch (error) {
+    console.error('获取无人机列表失败:', error)
+  }
 }
 
 // 查看详情
 const handleView = (row: any) => {
   currentOrder.value = row
   detailVisible.value = true
+}
+
+// 支付
+const handlePay = (row: any) => {
+  ElMessageBox.confirm('确认将该订单标记为已支付吗？', '支付确认', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'info'
+  }).then(async () => {
+    try {
+      await payOrder(row.id)
+      ElMessage.success('支付成功')
+      fetchData()
+    } catch (error) {
+      console.error('支付失败:', error)
+    }
+  })
 }
 
 // 归还

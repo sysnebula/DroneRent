@@ -6,8 +6,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxq.dronerent.common.BusinessException;
 import com.xxq.dronerent.common.Constants;
 import com.xxq.dronerent.entity.Drone;
+import com.xxq.dronerent.entity.InventoryLog;
 import com.xxq.dronerent.mapper.DroneMapper;
 import com.xxq.dronerent.service.DroneService;
+import com.xxq.dronerent.service.InventoryLogService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,7 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class DroneServiceImpl extends ServiceImpl<DroneMapper, Drone> implements DroneService {
+
+    private final InventoryLogService inventoryLogService;
 
     @Override
     @Cacheable(value = "drones", key = "#id")
@@ -125,7 +131,35 @@ public class DroneServiceImpl extends ServiceImpl<DroneMapper, Drone> implements
         // 更新状态
         drone.setStatus(newStatus);
         this.updateById(drone);
-        
+
+        // 记录库存日志（非订单触发的状态变更）
+        InventoryLog inventoryLog = new InventoryLog();
+        inventoryLog.setDroneId(id);
+        inventoryLog.setChangeType(mapChangeType(newStatus));
+        inventoryLog.setOldStatus(currentStatus);
+        inventoryLog.setNewStatus(newStatus);
+        inventoryLog.setOperationTime(java.time.LocalDateTime.now());
+        inventoryLog.setRemark("管理员手动变更状态: " + currentStatus + " -> " + newStatus);
+        inventoryLogService.save(inventoryLog);
+
         log.info("无人机状态更新成功: id={}, {} -> {}", id, currentStatus, newStatus);
+    }
+
+    /**
+     * 根据状态映射变动类型
+     */
+    private String mapChangeType(String newStatus) {
+        switch (newStatus) {
+            case Constants.DRONE_STATUS_RENTED:
+                return "RENT_OUT";
+            case Constants.DRONE_STATUS_MAINTENANCE:
+                return "MAINTENANCE";
+            case Constants.DRONE_STATUS_SCRAPPED:
+                return "SCRAP";
+            case Constants.DRONE_STATUS_IDLE:
+                return "RETURN";
+            default:
+                return "PURCHASE";
+        }
     }
 }

@@ -48,6 +48,15 @@ export function deleteOrder(id: number) {
   })
 }
 
+// 支付订单
+export function payOrder(id: number, paymentMethod: string = 'CASH') {
+  return request({
+    url: `/orders/${id}/pay`,
+    method: 'post',
+    params: { paymentMethod }
+  })
+}
+
 // 续租订单
 export function extendOrder(id: number, newEndDate: string) {
   return request({

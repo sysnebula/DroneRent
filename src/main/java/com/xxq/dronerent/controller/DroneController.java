@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -64,9 +65,9 @@ public class DroneController {
         
         // 构建查询条件
         LambdaQueryWrapper<Drone> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(brand != null, Drone::getBrand, brand)
-               .like(model != null, Drone::getModel, model)
-               .eq(status != null, Drone::getStatus, status)
+        wrapper.like(StringUtils.hasText(brand), Drone::getBrand, brand)
+               .like(StringUtils.hasText(model), Drone::getModel, model)
+               .eq(StringUtils.hasText(status), Drone::getStatus, status)
                .orderByDesc(Drone::getCreateTime);
         
         // 分页查询

@@ -7,6 +7,7 @@ import com.xxq.dronerent.common.PageResult;
 import com.xxq.dronerent.common.Result;
 import com.xxq.dronerent.dto.UserDTO;
 import com.xxq.dronerent.entity.SysUser;
+import com.xxq.dronerent.security.SecurityUser;
 import com.xxq.dronerent.service.SysUserService;
 import com.xxq.dronerent.vo.UserVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +18,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,8 +65,8 @@ public class UserController {
         
         // 构建查询条件
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(username != null, SysUser::getUsername, username)
-               .eq(role != null, SysUser::getRole, role)
+        wrapper.like(StringUtils.hasText(username), SysUser::getUsername, username)
+               .eq(StringUtils.hasText(role), SysUser::getRole, role)
                .orderByDesc(SysUser::getCreateTime);
         
         // 分页查询
@@ -201,21 +204,25 @@ public class UserController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')") // 需要管理员权限
     public Result<Void> deleteUser(
-            @Parameter(description = "用户ID") @PathVariable Long id) {
-        
+            @Parameter(description = "用户ID") @PathVariable Long id,
+            Authentication authentication) {
+
         log.info("删除用户: id={}", id);
-        
+
         SysUser user = sysUserService.getById(id);
         if (user == null) {
             throw new BusinessException("用户不存在");
         }
-        
+
         // 不允许删除自己
-        // TODO: 从 SecurityContext 获取当前用户ID进行比较
-        
+        SecurityUser currentUser = (SecurityUser) authentication.getPrincipal();
+        if (currentUser.getUserId().equals(id)) {
+            throw new BusinessException("不允许删除自己的账号");
+        }
+
         // 删除（逻辑删除）
         sysUserService.removeById(id);
-        
+
         return Result.success("删除成功", null);
     }
 

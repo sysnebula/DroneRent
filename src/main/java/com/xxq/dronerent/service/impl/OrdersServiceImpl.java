@@ -5,12 +5,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxq.dronerent.common.BusinessException;
 import com.xxq.dronerent.common.Constants;
 import com.xxq.dronerent.dto.OrderCreateDTO;
-import com.xxq.dronerent.entity.Customer;
-import com.xxq.dronerent.entity.Drone;
-import com.xxq.dronerent.entity.Orders;
+import com.xxq.dronerent.entity.*;
 import com.xxq.dronerent.mapper.OrdersMapper;
 import com.xxq.dronerent.service.CustomerService;
 import com.xxq.dronerent.service.DroneService;
+import com.xxq.dronerent.service.FinanceTransactionService;
+import com.xxq.dronerent.service.InventoryLogService;
 import com.xxq.dronerent.service.OrdersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +35,8 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
     private final DroneService droneService;
     private final CustomerService customerService;
+    private final InventoryLogService inventoryLogService;
+    private final FinanceTransactionService financeTransactionService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -120,9 +122,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
         this.save(order);
 
-        // 8. 更新无人机状态为出租中
-        droneService.updateDroneStatus(drone.getId(), Constants.DRONE_STATUS_RENTED);
-
+        // 8. 注意：无人机状态在支付成功后才会变更为出租中
         log.info("订单创建成功: orderId={}, orderNo={}", order.getId(), orderNo);
 
         return order.getId();
@@ -146,8 +146,8 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         }
 
         // 3. 验证新的结束日期
-        if (newEndDate.isBefore(order.getEndDate())) {
-            throw new BusinessException("新的结束日期不能早于原结束日期");
+        if (!newEndDate.isAfter(order.getEndDate())) {
+            throw new BusinessException("新的结束日期必须晚于原结束日期");
         }
 
         // 4. 计算新增的天数和费用
@@ -207,6 +207,18 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         // 5. 更新无人机状态为空闲
         droneService.updateDroneStatus(order.getDroneId(), Constants.DRONE_STATUS_IDLE);
 
+        // 6. 记录库存日志
+        recordInventoryLog(order.getDroneId(), "RETURN",
+                Constants.DRONE_STATUS_RENTED, Constants.DRONE_STATUS_IDLE,
+                order.getOrderNo(), order.getUserId());
+
+        // 7. 记录财务流水（退款）
+        if (refundAmount.compareTo(java.math.BigDecimal.ZERO) > 0) {
+            recordFinanceTransaction(order.getOrderNo(), order.getId(),
+                    "REFUND", refundAmount, "EXPENSE",
+                    order.getPaymentMethod(), order.getUserId());
+        }
+
         log.info("订单归还成功: orderId={}, 实际天数={}, 退款金额={}",
                 orderId, actualDays, refundAmount);
     }
@@ -233,10 +245,94 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
         this.updateById(order);
 
-        // 4. 更新无人机状态为空闲
-        droneService.updateDroneStatus(order.getDroneId(), Constants.DRONE_STATUS_IDLE);
+        // 4. 注意：取消订单不会改变无人机状态（无人机从未被租出）
+
+        // 5. 记录库存日志
+        recordInventoryLog(order.getDroneId(), "CANCEL_ORDER",
+                Constants.DRONE_STATUS_IDLE, Constants.DRONE_STATUS_IDLE,
+                order.getOrderNo(), order.getUserId());
 
         log.info("订单取消成功: orderId={}", orderId);
+    }
+
+    /**
+     * 记录库存日志
+     */
+    private void recordInventoryLog(Long droneId, String changeType,
+                                     String oldStatus, String newStatus,
+                                     String orderNo, Long operatorId) {
+        InventoryLog log = new InventoryLog();
+        log.setDroneId(droneId);
+        log.setChangeType(changeType);
+        log.setOldStatus(oldStatus);
+        log.setNewStatus(newStatus);
+        log.setRelatedOrderNo(orderNo);
+        log.setOperatorId(operatorId);
+        log.setOperationTime(LocalDateTime.now());
+        log.setRemark(changeType);
+        inventoryLogService.save(log);
+    }
+
+    /**
+     * 记录财务流水
+     */
+    private void recordFinanceTransaction(String orderNo, Long orderId,
+                                           String transactionType, java.math.BigDecimal amount,
+                                           String direction, String paymentMethod, Long operatorId) {
+        FinanceTransaction ft = new FinanceTransaction();
+        ft.setTransactionNo("FIN" + System.currentTimeMillis() + ((int)(Math.random() * 9000) + 1000));
+        ft.setOrderId(orderId);
+        ft.setTransactionType(transactionType);
+        ft.setAmount(amount);
+        ft.setDirection(direction);
+        ft.setPaymentMethod(paymentMethod);
+        ft.setTransactionTime(LocalDateTime.now());
+        ft.setOperatorId(operatorId);
+        financeTransactionService.save(ft);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void payOrder(Long orderId, String paymentMethod) {
+        log.info("支付订单: orderId={}, paymentMethod={}", orderId, paymentMethod);
+
+        Orders order = this.getById(orderId);
+        if (order == null) {
+            throw new BusinessException("订单不存在");
+        }
+
+        if (!Constants.ORDER_STATUS_PENDING.equals(order.getStatus())) {
+            throw new BusinessException("只有待支付的订单才能支付");
+        }
+
+        // 更新订单状态
+        order.setStatus(Constants.ORDER_STATUS_PAID);
+        order.setPaymentMethod(paymentMethod);
+        order.setPaymentTime(LocalDateTime.now());
+        order.setPaidAmount(order.getTotalAmount().add(order.getDepositAmount()));
+        this.updateById(order);
+
+        // 更新无人机状态为出租中
+        droneService.updateDroneStatus(order.getDroneId(), Constants.DRONE_STATUS_RENTED);
+
+        // 记录库存日志
+        recordInventoryLog(order.getDroneId(), "RENT_OUT",
+                Constants.DRONE_STATUS_IDLE, Constants.DRONE_STATUS_RENTED,
+                order.getOrderNo(), order.getUserId());
+
+        // 记录财务流水（租金收入）
+        recordFinanceTransaction(order.getOrderNo(), order.getId(),
+                "RENTAL_FEE", order.getTotalAmount(), "INCOME",
+                paymentMethod, order.getUserId());
+
+        // 记录财务流水（押金收入）
+        if (order.getDepositAmount().compareTo(java.math.BigDecimal.ZERO) > 0) {
+            recordFinanceTransaction(order.getOrderNo(), order.getId(),
+                    "DEPOSIT", order.getDepositAmount(), "INCOME",
+                    paymentMethod, order.getUserId());
+        }
+
+        log.info("订单支付成功: orderId={}", orderId);
     }
 
     /**

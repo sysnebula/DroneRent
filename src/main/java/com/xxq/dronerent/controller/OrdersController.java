@@ -7,9 +7,15 @@ import com.xxq.dronerent.common.PageResult;
 import com.xxq.dronerent.common.Result;
 import com.xxq.dronerent.dto.OrderCreateDTO;
 import com.xxq.dronerent.dto.OrderUpdateDTO;
+import com.xxq.dronerent.entity.Customer;
+import com.xxq.dronerent.entity.Drone;
 import com.xxq.dronerent.entity.Orders;
+import com.xxq.dronerent.entity.SysUser;
 import com.xxq.dronerent.security.SecurityUser;
+import com.xxq.dronerent.service.CustomerService;
+import com.xxq.dronerent.service.DroneService;
 import com.xxq.dronerent.service.OrdersService;
+import com.xxq.dronerent.service.SysUserService;
 import com.xxq.dronerent.vo.OrderVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -41,6 +48,9 @@ import java.util.stream.Collectors;
 public class OrdersController {
 
     private final OrdersService ordersService;
+    private final CustomerService customerService;
+    private final DroneService droneService;
+    private final SysUserService sysUserService;
 
     /**
      * 分页查询订单列表
@@ -64,7 +74,7 @@ public class OrdersController {
 
         // 构建查询条件
         LambdaQueryWrapper<Orders> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(status != null, Orders::getStatus, status)
+        wrapper.eq(StringUtils.hasText(status), Orders::getStatus, status)
                .eq(customerId != null, Orders::getCustomerId, customerId)
                .orderByDesc(Orders::getCreateTime);
 
@@ -242,6 +252,27 @@ public class OrdersController {
     }
 
     /**
+     * 支付订单
+     *
+     * @param id            订单ID
+     * @param paymentMethod 支付方式
+     * @return 操作结果
+     */
+    @Operation(summary = "支付订单", description = "支付待支付的订单，支付后无人机状态变更为出租中")
+    @PostMapping("/{id}/pay")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
+    public Result<Void> payOrder(
+            @Parameter(description = "订单ID") @PathVariable Long id,
+            @Parameter(description = "支付方式") @RequestParam(defaultValue = "CASH") String paymentMethod) {
+
+        log.info("支付订单: id={}, paymentMethod={}", id, paymentMethod);
+
+        ordersService.payOrder(id, paymentMethod);
+
+        return Result.success("支付成功", null);
+    }
+
+    /**
      * 取消订单
      *
      * @param id           订单ID
@@ -268,7 +299,28 @@ public class OrdersController {
     private OrderVO convertToVO(Orders order) {
         OrderVO vo = new OrderVO();
         BeanUtils.copyProperties(order, vo);
-        // TODO: 可以在此处填充客户姓名、无人机型号等关联信息
+
+        // 填充客户姓名
+        Customer customer = customerService.getById(order.getCustomerId());
+        if (customer != null) {
+            vo.setCustomerName(customer.getName());
+        }
+
+        // 填充无人机编号和型号
+        Drone drone = droneService.getById(order.getDroneId());
+        if (drone != null) {
+            vo.setDroneNo(drone.getDroneNo());
+            vo.setDroneModel(drone.getBrand() + " " + drone.getModel());
+        }
+
+        // 填充经办人姓名
+        if (order.getUserId() != null) {
+            SysUser user = sysUserService.getById(order.getUserId());
+            if (user != null) {
+                vo.setUserName(user.getRealName());
+            }
+        }
+
         return vo;
     }
 }

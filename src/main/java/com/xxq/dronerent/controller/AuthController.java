@@ -8,6 +8,7 @@ import com.xxq.dronerent.security.SecurityUser;
 import com.xxq.dronerent.vo.LoginVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -104,13 +106,13 @@ public class AuthController {
      */
     @Operation(summary = "刷新 Token", description = "刷新当前用户的 JWT Token")
     @PostMapping("/refresh")
-    public Result<LoginVO> refreshToken(Authentication authentication) {
+    public Result<LoginVO> refreshToken(Authentication authentication, HttpServletRequest request) {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        
-        // 刷新 Token
-        String oldToken = null; // 从请求头获取旧 Token
+
+        // 从请求头获取旧 Token
+        String oldToken = extractTokenFromRequest(request);
         String newToken = jwtUtil.refreshToken(oldToken);
-        
+
         if (newToken != null) {
             LoginVO loginVO = new LoginVO();
             loginVO.setToken(newToken);
@@ -119,10 +121,21 @@ public class AuthController {
             loginVO.setUsername(securityUser.getUsername());
             loginVO.setRealName(securityUser.getRealName());
             loginVO.setRole(securityUser.getRole());
-            
+
             return Result.success("Token 刷新成功", loginVO);
         } else {
             return Result.error("Token 刷新失败");
         }
+    }
+
+    /**
+     * 从请求头中提取 Token
+     */
+    private String extractTokenFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 }

@@ -39,6 +39,14 @@ public interface OrdersService extends IService<Orders> {
     void earlyReturn(Long orderId, String returnPerson, String returnPhone);
 
     /**
+     * 支付订单
+     *
+     * @param orderId 订单ID
+     * @param paymentMethod 支付方式
+     */
+    void payOrder(Long orderId, String paymentMethod);
+
+    /**
      * 取消订单
      *
      * @param orderId 订单ID

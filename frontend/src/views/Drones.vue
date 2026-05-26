@@ -183,10 +183,13 @@ const fetchData = async () => {
       pageSize: pagination.pageSize,
       ...searchForm
     })
+    console.log('获取无人机列表成功:', res)
     tableData.value = res.data.list
     pagination.total = res.data.total
+    console.log('表格数据:', tableData.value, '总数:', pagination.total)
   } catch (error) {
     console.error('获取数据失败:', error)
+    ElMessage.error('获取数据失败')
   } finally {
     loading.value = false
   }
@@ -244,17 +247,25 @@ const handleSubmit = async () => {
     if (valid) {
       submitLoading.value = true
       try {
+        let result
         if (formData.id) {
-          await updateDrone(formData.id, formData)
+          result = await updateDrone(formData.id, formData)
+          console.log('更新结果:', result)
           ElMessage.success('更新成功')
         } else {
-          await createDrone(formData)
+          result = await createDrone(formData)
+          console.log('创建结果:', result)
           ElMessage.success('创建成功')
         }
+        // 先关闭对话框
         dialogVisible.value = false
-        fetchData()
-      } catch (error) {
+        // 等待一小段时间再刷新数据，确保数据库已提交
+        setTimeout(async () => {
+          await fetchData()
+        }, 300)
+      } catch (error: any) {
         console.error('提交失败:', error)
+        ElMessage.error(error.message || '操作失败')
       } finally {
         submitLoading.value = false
       }
@@ -265,12 +276,15 @@ const handleSubmit = async () => {
 // 对话框关闭
 const handleDialogClose = () => {
   formRef.value?.resetFields()
-  Object.keys(formData).forEach(key => {
-    // @ts-ignore
-    formData[key] = key === 'id' ? null : ''
-  })
+  // 重置表单数据
+  formData.id = null
+  formData.droneNo = ''
+  formData.brand = ''
+  formData.model = ''
+  formData.serialNumber = ''
   formData.dailyRentalPrice = 0
   formData.depositAmount = 0
+  formData.description = ''
 }
 
 // 获取状态类型
